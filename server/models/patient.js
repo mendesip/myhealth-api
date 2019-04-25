@@ -2,7 +2,18 @@ export default (sequelize, DataTypes) => {
     const patient = sequelize.define('patient', {
             sus_number: {
                 allowNull: false,
+                primaryKey: true,
                 type: DataTypes.STRING
+            },
+            user_id:{
+                allowNull: false,
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'user',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE'
             },
             name: {
                 allowNull: false,
@@ -55,8 +66,5 @@ export default (sequelize, DataTypes) => {
             timestamps: false,
         }
     );
-    patient.associate = (models) => {
-      patient.hasOne(models.user);
-    };
     return patient;
 };

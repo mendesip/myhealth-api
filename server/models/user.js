@@ -1,11 +1,12 @@
 export default (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: {
         args: false,
         msg: 'Please enter the user id'
       },
+      autoIncrement: true,
       primaryKey: true
     },
     email: {
