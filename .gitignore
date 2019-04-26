@@ -1,3 +1,4 @@
 .gitignore
 .env
+dist
 package-lock.json
