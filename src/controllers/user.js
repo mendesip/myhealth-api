@@ -10,8 +10,8 @@ export default class User {
                 email: email
             }
             })
-            .then(userData => {
-                if (userData !== null){
+            .then(user_data => {
+                if (user_data !== null){
                     res.status(200).send({
                         success: false,
                         message: 'User registered already',
@@ -21,10 +21,10 @@ export default class User {
                             id,
                             email,
                             password
-                        }).then(userData => res.status(201).send({
+                        }).then(user_data => res.status(201).send({
                         success: true,
                         message: 'User registered successfully',
-                        userData
+                        user_data
                     }));
                 }
             }).catch(error => res.status(400).send(error));
@@ -36,9 +36,9 @@ export default class User {
                 email: email
             }
             })
-            .then((userData) => {
-                if (userData !== null) {
-                    if (userData.password !== password) {
+            .then((user_data) => {
+                if (user_data !== null) {
+                    if (user_data.password !== password) {
                         res.status(200).send({
                             success: false,
                             message: 'Wrong password',
@@ -47,7 +47,7 @@ export default class User {
                         res.status(201).send({
                             success: true,
                             message: 'User logged successfully',
-                            userData
+                            user_data
                         })
                     }
                 }else{
@@ -66,20 +66,20 @@ export default class User {
                 email: email
             }
         })
-            .then((userData) => {
-                if (userData !== null) {
-                    if (userData.password !== password) {
+            .then((user_data) => {
+                if (user_data !== null) {
+                    if (user_data.password !== password) {
                         res.status(200).send({
                             success: false,
                             message: 'Wrong password',
                         })
                     } else {
-                        userData.destroy()
+                        user_data.destroy()
                             .catch(error => res.status(400).send(error));
                         res.status(201).send({
                             success: true,
                             message: 'User deleted successfully',
-                            userData
+                            user_data
                         })
                     }
                 }else{

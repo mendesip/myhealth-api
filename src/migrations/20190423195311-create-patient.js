@@ -27,7 +27,8 @@ module.exports = {
       },
       gender: {
         allowNull: false,
-        type: Sequelize.CHAR
+        type: Sequelize.CHAR,
+        length: 1
       },
       mothers_name: {
         allowNull: false,
