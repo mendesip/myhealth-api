@@ -1,11 +1,11 @@
 import model from '../models';
 
-const { user } = model;
+const { User } = model;
 
-export default class User {
+export default class UserController {
     static signUp(req, res) {
         const {id, email, password} = req.body;
-        return user.findOne({
+        return User.findOne({
             where: {
                 email: email
             }
@@ -17,7 +17,7 @@ export default class User {
                         message: 'User registered already',
                     })
                 }else {
-                    user.create({
+                    User.create({
                             id,
                             email,
                             password
@@ -31,7 +31,7 @@ export default class User {
     }
     static signIn(req, res){
         const {email, password} = req.body;
-        return user.findOne({
+        return User.findOne({
             where: {
                 email: email
             }
@@ -61,7 +61,7 @@ export default class User {
     }
     static exclude(req, res){
         const {email, password} = req.body;
-        return user.findOne({
+        return User.findOne({
             where: {
                 email: email
             }
@@ -92,7 +92,7 @@ export default class User {
             .catch(error => res.status(400).send(error));
     }
     static list(req, res){
-        return user
+        return User
             .findAll({
                 attributes: ['id', 'email', 'password']
             })

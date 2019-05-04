@@ -1,13 +1,15 @@
-export default (sequelize, DataTypes) => {
-    const patient = sequelize.define('patient', {
+const Sequelize = require("sequelize");
+export default class Patient extends Sequelize.Model{
+    static init(sequelize){
+        return super.init({
             sus_number: {
-                allowNull: false,
+                type: Sequelize.STRING,
                 primaryKey: true,
-                type: DataTypes.STRING
+                allowNull: false
             },
             user_id:{
+                type: Sequelize.INTEGER,
                 allowNull: false,
-                type: DataTypes.INTEGER,
                 references: {
                     model: 'user',
                     key: 'id'
@@ -16,55 +18,58 @@ export default (sequelize, DataTypes) => {
                 onDelete: 'CASCADE'
             },
             name: {
-                allowNull: false,
-                type: DataTypes.STRING
+                type: Sequelize.STRING,
+                allowNull: false
             },
             date_of_birth: {
-                allowNull: false,
-                type: DataTypes.STRING
+                type: Sequelize.DATE,
+                allowNull: false
             },
             gender: {
-                allowNull: false,
-                type: DataTypes.CHAR
+                type: Sequelize.CHAR(1),
+                allowNull: false
             },
             mothers_name: {
+                type: Sequelize.STRING,
                 allowNull: false,
-                type: DataTypes.STRING
             },
             place_of_birth: {
-                allowNull: false,
-                type: DataTypes.STRING
+                type: Sequelize.STRING,
+                allowNull: false
             },
-            postal_code: {
-                allowNull: false,
-                type: DataTypes.STRING
+            postcode: {
+                type: Sequelize.STRING,
+                allowNull: false
             },
             thoroughfare: {
-                allowNull: false,
-                type: DataTypes.STRING
+                type: Sequelize.STRING,
+                allowNull: false
             },
             number: {
+                type: Sequelize.INTEGER,
                 allowNull: false,
-                type: DataTypes.STRING
+            },
+            complement: {
+                type: Sequelize.STRING,
+                allowNull: true,
             },
             neighborhood: {
+                type: Sequelize.STRING,
                 allowNull: false,
-                type: DataTypes.STRING
             },
             city: {
+                type: Sequelize.STRING,
                 allowNull: false,
-                type: DataTypes.STRING
             },
             state: {
+                type: Sequelize.STRING,
                 allowNull: false,
-                type: DataTypes.STRING
-            },
-        }, {
-            sequelize,
+            }
+        },{
             modelName: 'patient',
             freezeTableName: true,
             timestamps: false,
-        }
-    );
-    return patient;
-};
+            sequelize
+        });
+    }
+}

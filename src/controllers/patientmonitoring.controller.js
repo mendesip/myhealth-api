@@ -1,11 +1,11 @@
 import model from '../models';
 
-const { patient_monitor } = model;
+const { PatientMonitoring } = model;
 
-export default class PatientMonitor {
+export default class PatientMonitoringController {
     static create(req, res) {
         const {patient_id, ncd_id, frequency_id} = req.body;
-        return patient_monitor.create({
+        return PatientMonitoring.create({
             patient_id, ncd_id, frequency_id
             }).then(monitor_data => res.status(201).send({
                 success: true,
@@ -16,7 +16,7 @@ export default class PatientMonitor {
 
     static delete(req, res){
         const {patient_id, ncd_id} = req.body;
-        return patient_monitor.findOne({
+        return PatientMonitoring.findOne({
             where: {
                 patient_id: patient_id,
                 ncd_id: ncd_id
@@ -38,7 +38,7 @@ export default class PatientMonitor {
         }).catch(error => res.status(400).send(error));
     }
     static list(req, res){
-        return patient_monitor
+        return PatientMonitoring
             .findAll()
             .then(monitor_data => res.status(200).send(monitor_data))
             .catch(error => res.status(400).send(error));

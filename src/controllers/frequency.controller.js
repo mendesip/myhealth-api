@@ -1,22 +1,22 @@
 import model from '../models';
 
-const { frequency } = model;
+const { Frequency } = model;
 
-export default class Frequency {
+export default class FrequencyController {
     static create(req, res) {
         const {type, days_of_week, custom_every, times_a_day, hours_of_day, start_date} = req.body;
-        return frequency.create({
+        return Frequency.create({
             type, days_of_week, custom_every, times_a_day, hours_of_day, start_date
             }).then(frequencyData => res.status(201).send({
                 success: true,
-                message: 'Frequency registered successfully',
+                message: 'FrequencyController registered successfully',
                 frequency_id: frequencyData.id
             }));
     }
 
     static delete(req, res){
         const {id} = req.body;
-        return frequency.findOne({
+        return Frequency.findOne({
             where: {
                 id: id
             }
@@ -25,19 +25,19 @@ export default class Frequency {
                 frequency_data.destroy().catch(error => res.status(400).send(error));
                 res.status(201).send({
                     success: true,
-                    message: 'Frequency deleted successfully',
+                    message: 'FrequencyController deleted successfully',
                     frequency_data
                 })
             }else{
                 res.status(200).send({
                     success: false,
-                    message: 'Frequency not registered',
+                    message: 'FrequencyController not registered',
                 });
             }
         }).catch(error => res.status(400).send(error));
     }
     static list(req, res){
-        return frequency
+        return Frequency
             .findAll({
                 attributes: ['type','days_of_week','custom_every','times_a_day','hours_of_day','start_date']
             })

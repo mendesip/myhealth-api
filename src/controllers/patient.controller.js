@@ -1,18 +1,18 @@
 import model from '../models';
 
-const {patient, user} = model;
+const {Patient, User} = model;
 
-export default class Patient {
+export default class PatientController {
     static create(req, res) {
         const {email, sus_number, name, date_of_birth, gender, mothers_name, place_of_birth, address} = req.body;
-        const {postal_code, thoroughfare, number, neighborhood, city, state} = address;
-        user.findOne({
+        const {postcode, thoroughfare, number, complement, neighborhood, city, state} = address;
+        User.findOne({
             where: {
                 email: email
             },
             attributes: ['id']
         }).then(userData => {
-            patient.findOne({
+            Patient.findOne({
                 where: {
                     user_id:userData.id
                 }
@@ -23,10 +23,10 @@ export default class Patient {
                         message: 'Patient already registered',
                     });
                 }else{
-                    patient
+                    Patient
                         .create({
                             sus_number, user_id:userData.id, name, date_of_birth, gender, mothers_name,
-                            place_of_birth, postal_code, thoroughfare, number, neighborhood, city, state
+                            place_of_birth, postcode, thoroughfare, number, complement, neighborhood, city, state
                         })
                         .then(patient_data => res.status(201).send({
                             success: true,
@@ -39,13 +39,13 @@ export default class Patient {
     }
     static loadByUser(req, res){
         const {email} = req.body;
-        return user.findOne({
+        return User.findOne({
             where: {
                 email: email
             },
             attributes: ['id']
         }).then(userData => {
-            patient.findOne({
+            Patient.findOne({
                 where: {
                     user_id: userData.id
                 }
@@ -67,7 +67,7 @@ export default class Patient {
     }
     static load(req, res){
         const {sus_number} = req.body;
-        return patient.findOne({
+        return Patient.findOne({
             where: {
                 sus_number: sus_number
             }
@@ -87,7 +87,7 @@ export default class Patient {
             });
     }
     static list(req, res){
-        return patient
+        return Patient
             .findAll()
             .then(patients => res.status(200).send(patients))
             .catch(error => res.status(400).send(error));

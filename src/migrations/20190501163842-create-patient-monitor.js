@@ -9,7 +9,9 @@ module.exports = {
         references:{
           model: 'patient',
           key: 'sus_number'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       ncd_id: {
         allowNull: false,
@@ -27,7 +29,9 @@ module.exports = {
         references:{
           model: 'frequency',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       }
     });
   },

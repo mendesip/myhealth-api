@@ -1,49 +1,51 @@
-export default (sequelize, DataTypes) => {
-  const register = sequelize.define('register', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
-    },
-    patient_id: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    ncd_id: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    timestamp: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    observation: {
-      type: DataTypes.STRING
-    },
-    systolic: {
-      type: DataTypes.INTEGER
-    },
-    diastolic: {
-      type: DataTypes.INTEGER
-    },
-    heart_beats: {
-      type: DataTypes.INTEGER
-    },
-    weight: {
-      type: DataTypes.FLOAT
-    },
-    glycemic_rate: {
-      type: DataTypes.FLOAT
-    },
-    bodyfat: {
-      type: DataTypes.FLOAT
-    }
-  }, {
-    sequelize,
-    modelName: 'register',
-    freezeTableName: true,
-    timestamps: false,
-  });
-  return register;
-};
+const Sequelize = require("sequelize");
+export default class Register extends Sequelize.Model {
+  static init(sequelize){
+    return super.init({
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        autoIncrement: true
+      },
+      patient_id: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      ncd_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      timestamp: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      observation: {
+        type: Sequelize.STRING
+      },
+      systolic: {
+        type: Sequelize.INTEGER
+      },
+      diastolic: {
+        type: Sequelize.INTEGER
+      },
+      heart_beats: {
+        type: Sequelize.INTEGER
+      },
+      weight: {
+        type: Sequelize.FLOAT
+      },
+      glycemic_rate: {
+        type: Sequelize.FLOAT
+      },
+      bodyfat: {
+        type: Sequelize.FLOAT
+      }
+    },{
+      modelName: 'register',
+      freezeTableName: true,
+      timestamps: false,
+      sequelize,
+    });
+  }
+}

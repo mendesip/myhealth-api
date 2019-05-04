@@ -1,22 +1,22 @@
 import model from '../models';
 
-const { ncd } = model;
+const { NCD } = model;
 
-export default class NCD {
+export default class NCDController {
     static create(req, res) {
         const {type} = req.body;
-        return ncd.create({
+        return NCD.create({
             type
             }).then(ncdData => res.status(201).send({
                 success: true,
-                message: 'NCD registered successfully',
+                message: 'NCDController registered successfully',
                 ncdData
             })).catch(error => res.status(400).send(error));
     }
 
     static delete(req, res){
         const {id} = req.body;
-        return ncd.findOne({
+        return NCD.findOne({
             where: {
                 id: id
             }
@@ -25,19 +25,19 @@ export default class NCD {
                 ncdData.destroy().catch(error => res.status(400).send(error));
                 res.status(201).send({
                     success: true,
-                    message: 'NCD deleted successfully',
+                    message: 'NCDController deleted successfully',
                     ncdData
                 })
             }else{
                 res.status(200).send({
                     success: false,
-                    message: 'NCD not registered',
+                    message: 'NCDController not registered',
                 });
             }
         }).catch(error => res.status(400).send(error));
     }
     static list(req, res){
-        return ncd
+        return NCD
             .findAll({
                 attributes: ['id', 'type']
             })

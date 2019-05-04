@@ -3,14 +3,14 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('ncd', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        allowNull: false,
+        autoIncrement: true
       },
       type: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       }
     });
   },

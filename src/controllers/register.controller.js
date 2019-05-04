@@ -1,23 +1,23 @@
 import model from '../models';
 
-const { register } = model;
+const { Register } = model;
 
-export default class Register {
+export default class RegisterController {
     static create(req, res) {
         const {patient_id, ncd_id, timestamp, observation, systolic, diastolic,
             heart_beats, weight, glycemic_rate, bodyfat} = req.body;
-        return register.create({
+        return Register.create({
             patient_id, ncd_id, timestamp, observation, systolic,
             diastolic, heart_beats, weight, glycemic_rate, bodyfat
             }).then(registerData => res.status(201).send({
                 success: true,
-                message: 'Frequency registered successfully',
+                message: 'FrequencyController registered successfully',
                 register_id: registerData.id
             }));
     }
     static list(req, res){
         const {patient_id} = req.body;
-        return register
+        return Register
             .findAll({
                 attributes: ['patient_id','ncd_id','timestamp','observation','systolic','diastolic',
                     'heart_beats','weight','glycemic_rate','bodyfat'],
@@ -25,6 +25,6 @@ export default class Register {
                     patient_id:patient_id
                 }
             })
-            .then(registers => res.status(200).send(registers));
+            .then(registers => res.status(201).send(registers));
     }
 }

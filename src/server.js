@@ -6,12 +6,11 @@ import routes from './routes';
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT;
-const app = express(); // setup express application
+const app = express();
 const server = http.createServer(app);
 
-app.use(logger('dev')); // log requests to the console
+app.use(logger('dev'));
 
-// Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

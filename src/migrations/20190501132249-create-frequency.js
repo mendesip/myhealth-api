@@ -3,34 +3,34 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('frequency', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        allowNull: false,
+        autoIncrement: true
       },
       type: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER
       },
       days_of_week: {
+        type: Sequelize.ARRAY(Sequelize.BOOLEAN),
         allowNull: false,
-        type: Sequelize.ARRAY(Sequelize.BOOLEAN)
       },
       custom_every: {
-        allowNull: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: true
       },
       times_a_day: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       hours_of_day: {
-        allowNull: false,
-        type: Sequelize.ARRAY(Sequelize.TIME)
+        type: Sequelize.ARRAY(Sequelize.TIME),
+        allowNull: false
       },
       start_date: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       }
     });
   },

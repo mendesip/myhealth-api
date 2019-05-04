@@ -3,13 +3,13 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('patient', {
       sus_number: {
-        allowNull: false,
+        type: Sequelize.STRING,
         primaryKey: true,
-        type: Sequelize.STRING
+        allowNull: false
       },
       user_id:{
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'user',
           key: 'id'
@@ -18,49 +18,52 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       name: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       date_of_birth: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       gender: {
-        allowNull: false,
-        type: Sequelize.CHAR,
-        length: 1
+        type: Sequelize.CHAR(1),
+        allowNull: false
       },
       mothers_name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       place_of_birth: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      postal_code: {
-        allowNull: false,
-        type: Sequelize.STRING
+      postcode: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       thoroughfare: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       number: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER
+      },
+      complement: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       neighborhood: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       city: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       state: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       }
     });
   },
