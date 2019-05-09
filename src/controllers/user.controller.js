@@ -27,7 +27,7 @@ export default class UserController {
                         user_data
                     }));
                 }
-            }).catch(error => res.status(400).send(error));
+            });
     }
     static signIn(req, res){
         const {email, password} = req.body;
