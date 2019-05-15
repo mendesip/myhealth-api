@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 import User from "./user";
 import Patient from "./patient";
 import NCD from "./ncd";
-import Frequncy from "./frequency";
+import Frequency from "./frequency";
 import Register from "./register";
 import PatinetMonitoring from "./patient_monitoring";
 
@@ -27,7 +27,7 @@ const models = {
   User: User.init(sequelize),
   Patient: Patient.init(sequelize),
   NCD: NCD.init(sequelize),
-  Frequncy: Frequncy.init(sequelize),
+  Frequency: Frequency.init(sequelize),
   Register: Register.init(sequelize),
   PatinetMonitoring: PatinetMonitoring.init(sequelize)
 };
