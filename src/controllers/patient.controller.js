@@ -5,7 +5,7 @@ const {Patient, User} = model;
 export default class PatientController {
     static create(req, res) {
         const {email, sus_number, name, date_of_birth, gender, mothers_name, place_of_birth, address} = req.body;
-        const {postcode, thoroughfare, number, complement, neighborhood, city, state} = address;
+        const {postal_code, thoroughfare, number, complement, neighborhood, city, state} = address;
         User.findOne({
             where: {
                 email: email
@@ -26,16 +26,16 @@ export default class PatientController {
                     Patient
                         .create({
                             sus_number, user_id:userData.id, name, date_of_birth, gender, mothers_name,
-                            place_of_birth, postcode, thoroughfare, number, complement, neighborhood, city, state
+                            place_of_birth, postcode:postal_code, thoroughfare, number, complement, neighborhood, city, state
                         })
                         .then(patient_data => res.status(201).send({
                             success: true,
                             message: 'Patient registered successfully',
                             patient_data
-                        })).catch(error => res.status(400).send(error));
+                        }));
                 }
-            }).catch(error => res.status(400).send(error));
-        }).catch(error => res.status(400).send(error));
+            });
+        });
     }
     static loadByUser(req, res){
         const {email} = req.body;

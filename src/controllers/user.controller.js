@@ -4,7 +4,7 @@ const { User } = model;
 
 export default class UserController {
     static signUp(req, res) {
-        const {id, email, password} = req.body;
+        const {email, password} = req.body;
         return User.findOne({
             where: {
                 email: email
@@ -18,7 +18,6 @@ export default class UserController {
                     })
                 }else {
                     User.create({
-                            id,
                             email,
                             password
                         }).then(user_data => res.status(201).send({
