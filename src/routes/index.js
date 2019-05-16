@@ -6,11 +6,6 @@ import FrequencyController from '../controllers/frequency.controller';
 import RegisterController from '../controllers/register.controller';
 
 export default (app) => {
-
-    app.get('*', (req, res) => res.status(200).send({
-        message: 'Welcome to the default API route',
-    }));
-
     app.post('/api/user/signUp', UserController.signUp);
     app.post('/api/user/signIn', UserController.signIn);
     app.post('/api/user/delete', UserController.exclude);
@@ -35,4 +30,8 @@ export default (app) => {
 
     app.post('/api/register/list', RegisterController.list);
     app.post('/api/register/create', RegisterController.create);
+
+    app.get('*', (req, res) => res.status(200).send({
+        message: 'Welcome to the default API route',
+    }));
 };
