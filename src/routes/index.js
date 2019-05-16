@@ -6,6 +6,11 @@ import FrequencyController from '../controllers/frequency.controller';
 import RegisterController from '../controllers/register.controller';
 
 export default (app) => {
+
+    app.get('*', (req, res) => res.status(200).send({
+        message: 'Welcome to the default API route',
+    }));
+
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the API!',
     }));

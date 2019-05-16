@@ -16,10 +16,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 routes(app);
 
-app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to the default API route',
-}));
-
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });

@@ -9,11 +9,11 @@ export default class RegisterController {
         return Register.create({
             patient_id, ncd_id, timestamp, observation, systolic,
             diastolic, heart_beats, weight, glycemic_rate, bodyfat
-            }).then(registerData => res.status(201).send({
+            }).then(registerData => res.status(200).send({
                 success: true,
                 message: 'FrequencyController registered successfully',
                 register_id: registerData.id
-            }));
+            })).catch(error => res.status(200).send(error));
     }
     static list(req, res){
         const {patient_id} = req.body;
@@ -24,7 +24,7 @@ export default class RegisterController {
                 where: {
                     patient_id:patient_id
                 }
-            })
-            .then(registers => res.status(201).send(registers));
+            }).then(registers => res.status(200).send(registers))
+            .catch(error => res.status(200).send(error));
     }
 }

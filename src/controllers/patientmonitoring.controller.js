@@ -7,11 +7,11 @@ export default class PatientMonitoringController {
         const {patient_id, ncd_id, frequency_id} = req.body;
         return PatientMonitoring.create({
             patient_id, ncd_id, frequency_id
-            }).then(monitor_data => res.status(201).send({
+            }).then(monitor_data => res.status(200).send({
                 success: true,
                 message: 'Monitoring registered successfully',
                 monitor_data
-            })).catch(error => res.status(400).send(error));
+            })).catch(error => res.status(200).send(error));
     }
 
     static delete(req, res){
@@ -23,7 +23,7 @@ export default class PatientMonitoringController {
             }
         }).then((monitor_data) => {
             if (monitor_data !== null) {
-                monitor_data.destroy().catch(error => res.status(400).send(error));
+                monitor_data.destroy().catch(error => res.status(200).send(error));
                 res.status(201).send({
                     success: true,
                     message: 'Monitoring deleted successfully',
@@ -35,12 +35,12 @@ export default class PatientMonitoringController {
                     message: 'Monitoring not registered',
                 });
             }
-        }).catch(error => res.status(400).send(error));
+        }).catch(error => res.status(200).send(error));
     }
     static list(req, res){
         return PatientMonitoring
             .findAll()
             .then(monitor_data => res.status(200).send(monitor_data))
-            .catch(error => res.status(400).send(error));
+            .catch(error => res.status(200).send(error));
     }
 }

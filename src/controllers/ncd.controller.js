@@ -11,7 +11,7 @@ export default class NCDController {
                 success: true,
                 message: 'NCDController registered successfully',
                 ncdData
-            })).catch(error => res.status(400).send(error));
+            })).catch(error => res.status(200).send(error));
     }
 
     static delete(req, res){
@@ -22,7 +22,7 @@ export default class NCDController {
             }
         }).then((ncdData) => {
             if (ncdData !== null) {
-                ncdData.destroy().catch(error => res.status(400).send(error));
+                ncdData.destroy().catch(error => res.status(200).send(error));
                 res.status(201).send({
                     success: true,
                     message: 'NCDController deleted successfully',
@@ -34,7 +34,7 @@ export default class NCDController {
                     message: 'NCDController not registered',
                 });
             }
-        }).catch(error => res.status(400).send(error));
+        }).catch(error => res.status(200).send(error));
     }
     static list(req, res){
         return NCD
@@ -42,6 +42,6 @@ export default class NCDController {
                 attributes: ['id', 'type']
             })
             .then(ncds => res.status(200).send(ncds))
-            .catch(error => res.status(400).send(error));
+            .catch(error => res.status(200).send(error));
     }
 }

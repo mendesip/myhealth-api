@@ -7,11 +7,11 @@ export default class FrequencyController {
         const {type, days_of_week, custom_every, times_a_day, hours_of_day, start_date} = req.body;
         return Frequency.create({
             type, days_of_week, custom_every, times_a_day, hours_of_day, start_date
-            }).then(frequencyData => res.status(201).send({
+            }).then(frequencyData => res.status(200).send({
                 success: true,
                 message: 'FrequencyController registered successfully',
                 frequency_id: frequencyData.id
-            }));
+            })).catch(error => res.status(200).send(error));
     }
 
     static delete(req, res){
@@ -22,8 +22,8 @@ export default class FrequencyController {
             }
         }).then((frequency_data) => {
             if (frequency_data !== null) {
-                frequency_data.destroy().catch(error => res.status(400).send(error));
-                res.status(201).send({
+                frequency_data.destroy().catch(error => res.status(200).send(error));
+                res.status(200).send({
                     success: true,
                     message: 'FrequencyController deleted successfully',
                     frequency_data
@@ -34,7 +34,7 @@ export default class FrequencyController {
                     message: 'FrequencyController not registered',
                 });
             }
-        }).catch(error => res.status(400).send(error));
+        }).catch(error => res.status(200).send(error));
     }
     static list(req, res){
         return Frequency
@@ -42,6 +42,6 @@ export default class FrequencyController {
                 attributes: ['type','days_of_week','custom_every','times_a_day','hours_of_day','start_date']
             })
             .then(frequencies => res.status(200).send(frequencies))
-            .catch(error => res.status(400).send(error));
+            .catch(error => res.status(200).send(error));
     }
 }

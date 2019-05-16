@@ -9,8 +9,7 @@ export default class UserController {
             where: {
                 email: email
             }
-            })
-            .then(user_data => {
+            }).then(user_data => {
                 if (user_data !== null){
                     res.status(200).send({
                         success: false,
@@ -20,13 +19,13 @@ export default class UserController {
                     User.create({
                             email,
                             password
-                        }).then(user_data => res.status(201).send({
-                        success: true,
-                        message: 'User registered successfully',
-                        user_data
-                    }));
+                        }).then(user_data => res.status(200).send({
+                            success: true,
+                            message: 'User registered successfully',
+                            user_data
+                     })).catch(error => res.status(200).send(error));
                 }
-            });
+            }).catch(error => res.status(200).send(error));
     }
     static signIn(req, res){
         const {email, password} = req.body;
@@ -43,7 +42,7 @@ export default class UserController {
                             message: 'Wrong password',
                         })
                     } else {
-                        res.status(201).send({
+                        res.status(200).send({
                             success: true,
                             message: 'User logged successfully',
                             user_data
@@ -55,31 +54,28 @@ export default class UserController {
                         message: 'User not registered',
                     });
                 }
-            })
-            .catch(error => res.status(400).send(error));
+            }).catch(error => res.status(200).send(error));
     }
     static exclude(req, res){
         const {email, password} = req.body;
         return User.findOne({
-            where: {
-                email: email
-            }
-        })
-            .then((user_data) => {
+                where: {
+                    email: email
+                }
+            }).then((user_data) => {
                 if (user_data !== null) {
                     if (user_data.password !== password) {
                         res.status(200).send({
                             success: false,
                             message: 'Wrong password',
-                        })
+                        });
                     } else {
-                        user_data.destroy()
-                            .catch(error => res.status(400).send(error));
-                        res.status(201).send({
+                        user_data.destroy().catch(error => res.status(200).send(error));
+                        res.status(200).send({
                             success: true,
                             message: 'User deleted successfully',
                             user_data
-                        })
+                        });
                     }
                 }else{
                     res.status(200).send({
@@ -87,8 +83,7 @@ export default class UserController {
                         message: 'User not registered',
                     });
                 }
-            })
-            .catch(error => res.status(400).send(error));
+            }).catch(error => res.status(200).send(error));
     }
     static list(req, res){
         return User
@@ -96,6 +91,6 @@ export default class UserController {
                 attributes: ['id', 'email', 'password']
             })
             .then(users => res.status(200).send(users))
-            .catch(error => res.status(400).send(error));
+            .catch(error => res.status(200).send(error));
     }
 }
