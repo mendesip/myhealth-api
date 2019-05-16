@@ -11,10 +11,6 @@ export default (app) => {
         message: 'Welcome to the default API route',
     }));
 
-    app.get('/api', (req, res) => res.status(200).send({
-        message: 'Welcome to the API!',
-    }));
-
     app.post('/api/user/signUp', UserController.signUp);
     app.post('/api/user/signIn', UserController.signIn);
     app.post('/api/user/delete', UserController.exclude);
