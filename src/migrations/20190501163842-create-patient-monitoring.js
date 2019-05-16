@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('patient_monitor', {
+    return queryInterface.createTable('patient_monitoring', {
       patient_id: {
         allowNull: false,
         primaryKey: true,
@@ -36,6 +36,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('patient_monitor');
+    return queryInterface.dropTable('patient_monitoring');
   }
 };
