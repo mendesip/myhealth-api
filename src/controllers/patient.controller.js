@@ -31,10 +31,19 @@ export default class PatientController {
                             success: true,
                             message: 'Patient registered successfully',
                             patient_data
-                        })).catch(error => res.status(200).send(error));
+                        })).catch(error => res.status(200).send({
+                        success: false,
+                        message: error
+                    }));
                 }
-            }).catch(error => res.status(200).send(error));
-        }).catch(error => res.status(200).send(error));
+            }).catch(error => res.status(200).send({
+                success: false,
+                message: error
+            }));
+        }).catch(error => res.status(200).send({
+            success: false,
+            message: error
+        }));
     }
     static loadByUser(req, res){
         const {email} = req.body;
