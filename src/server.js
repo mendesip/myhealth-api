@@ -7,9 +7,11 @@ import routes from './routes';
 const hostname = '0.0.0.0';
 const port = process.env.PORT;
 const app = express();
+const cors = require('cors');
 const server = http.createServer(app);
 
 app.use(logger('dev'));
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
