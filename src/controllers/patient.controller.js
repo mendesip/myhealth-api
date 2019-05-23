@@ -1,4 +1,7 @@
 import model from '../models';
+import PatientToken from "../models/patient_token";
+import PatientMonitoring from "../models/patient_monitoring";
+import Register from "../models/register";
 
 const {Patient, User} = model;
 
@@ -81,6 +84,64 @@ export default class PatientController {
                 success: false,
                 message: error,
                 code: 16
+            }));
+    }
+    static loadByToken(req, res){
+        const {request_data} = req.body;
+        const {sus_number, access_token} = request_data;
+
+        return PatientToken.findOne({where:{patient_id:sus_number, access_token, valid:true}})
+            .then(token_data => {
+                if(token_data){
+                    Patient.findOne({where: {sus_number}})
+                        .then(patient_data => {
+                            if (patient_data) {
+                                const response = {
+                                    success: true,
+                                    message: 'Patient loaded successfully',
+                                    code: 0,
+                                    patient_data
+                                };
+
+                                PatientToken.update(
+                                    {valid: false},
+                                    {where: {patient_id:sus_number, access_token}}
+                                );
+
+                                PatientMonitoring.findAll({where:{patient_id:sus_number}, attributes: ['ncd_id']})
+                                    .then(monitors => {
+                                        response.monitors = monitors;
+                                        Register.findAll({where:{patient_id:sus_number}})
+                                            .then(registers => {
+                                                response.registers = registers;
+                                                res.status(200).send(response);
+                                            });
+                                    });
+                            } else {
+                                res.status(200).send({
+                                    success: false,
+                                    message: 'Patient not found',
+                                    code: 16
+                                });
+                            }
+                        })
+                        .catch(error => res.status(200).send({
+                            success: false,
+                            message: error,
+                            code: 17
+                        }));
+                }else{
+                    res.status(200).send({
+                        success: false,
+                        message: 'Invalid access data',
+                        code: 15
+                    });
+                }
+            })
+            .catch(error => res.status(200).send({
+                success: false,
+                message: error,
+                code: 17
             }));
     }
     static load(req, res){

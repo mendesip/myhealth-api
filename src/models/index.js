@@ -9,6 +9,7 @@ import NCD from "./ncd";
 import Frequency from "./frequency";
 import Register from "./register";
 import PatientMonitoring from "./patient_monitoring";
+import PatientToken from "./patient_token";
 
 
 const result = dotenv.config();
@@ -29,7 +30,8 @@ const models = {
   NCD: NCD.init(sequelize),
   Frequency: Frequency.init(sequelize),
   Register: Register.init(sequelize),
-  PatientMonitoring: PatientMonitoring.init(sequelize)
+  PatientMonitoring: PatientMonitoring.init(sequelize),
+  PatientToken: PatientToken.init(sequelize)
 };
 
 Object.values(models)

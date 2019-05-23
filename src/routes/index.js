@@ -4,6 +4,7 @@ import NCDController from '../controllers/ncd.controller';
 import PatientMonitoringController from '../controllers/patientmonitoring.controller';
 import FrequencyController from '../controllers/frequency.controller';
 import RegisterController from '../controllers/register.controller';
+import PatientTokenController from "../controllers/patienttoken.controller";
 
 export default (app) => {
     app.post('/api/user/signUp', UserController.signUp);
@@ -14,6 +15,7 @@ export default (app) => {
     app.post('/api/patient/create', PatientController.create);
     app.post('/api/patient/load', PatientController.load);
     app.post('/api/patient/loadByUser', PatientController.loadByUser);
+    app.post('/api/patient/loadByToken', PatientController.loadByToken);
     app.get('/api/patient/list', PatientController.list);
 
     app.get('/api/ncd/list', NCDController.list);
@@ -30,6 +32,8 @@ export default (app) => {
 
     app.post('/api/register/list', RegisterController.list);
     app.post('/api/register/create', RegisterController.create);
+
+    app.post('/api/patient/token/load', PatientTokenController.load);
 
     app.get('*', (req, res) => res.status(200).send({
         message: 'Welcome to the default API route',
