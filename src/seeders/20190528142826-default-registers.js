@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('patient_monitoring', [
+    return queryInterface.bulkInsert('register', [
       {patient_id: "123123412341234", ncd_id: 0, timestamp: "2019-01-02T12:02:00.874Z", systolic: 85, diastolic: 125, heart_beats: 96, weight: 112.3},
       {patient_id: "123123412341234", ncd_id: 0, timestamp: "2019-01-03T12:00:00.874Z", systolic: 90, diastolic: 131, heart_beats: 72, weight: 112.3},
       {patient_id: "123123412341234", ncd_id: 0, timestamp: "2019-01-04T12:03:00.874Z", systolic: 88, diastolic: 141, heart_beats: 81, weight: 112.3},
@@ -105,6 +105,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('patient_monitoring', null, {});
+    return queryInterface.bulkDelete('register', null, {});
   }
 };
