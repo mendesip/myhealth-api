@@ -51,6 +51,24 @@ export default class PatientMonitoringController {
                 code: 30
             }));
     }
+    static listByPatient(req, res){
+        const {request_data} = req.body;
+        const {sus_number} = request_data;
+
+        return PatientMonitoring
+            .findAll({where:{patient_id:sus_number}})
+            .then(monitoring => res.status(200).send({
+                success: true,
+                message: 'Monitoring list loaded successfully',
+                code: 15,
+                monitoring
+            }))
+            .catch(error => res.status(200).send({
+                success: false,
+                message: error,
+                code: 31
+            }));
+    }
     static list(req, res){
         return PatientMonitoring
             .findAll()

@@ -23,6 +23,7 @@ export default (app) => {
     app.post('/api/ncd/delete', NCDController.delete);
 
     app.get('/api/monitor/list', PatientMonitoringController.list);
+    app.post('/api/monitor/listByPatient', PatientMonitoringController.listByPatient);
     app.post('/api/monitor/create', PatientMonitoringController.create);
     app.post('/api/monitor/delete', PatientMonitoringController.delete);
 
