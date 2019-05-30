@@ -1,6 +1,7 @@
 import model from '../models';
 
-const { PatientMonitoring } = model;
+
+const { PatientMonitoring, Frequency } = model;
 
 export default class PatientMonitoringController {
     static create(req, res) {
@@ -57,12 +58,27 @@ export default class PatientMonitoringController {
 
         return PatientMonitoring
             .findAll({where:{patient_id:sus_number}})
-            .then(monitoring => res.status(200).send({
-                success: true,
-                message: 'Monitoring list loaded successfully',
-                code: 15,
-                monitoring
-            }))
+            .then(monitoring => {
+                monitoring.forEach(monitor => {
+                    Frequency.findOne({where: {frequency_id: monitor.frequency_id}})
+                        .then(frequency => {
+                            if(frequency !== null){
+                                monitor.frequency = frequency;
+                            }
+                        })
+                        .catch(error => res.status(200).send({
+                            success: false,
+                            message: error,
+                            code: 31
+                        }));
+                });
+                res.status(200).send({
+                    success: true,
+                    message: 'Monitoring list loaded successfully',
+                    code: 15,
+                    monitoring
+                }
+            )})
             .catch(error => res.status(200).send({
                 success: false,
                 message: error,
