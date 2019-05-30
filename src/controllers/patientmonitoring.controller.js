@@ -60,7 +60,7 @@ export default class PatientMonitoringController {
             .findAll({where:{patient_id:sus_number}})
             .then(monitoring => {
                 monitoring.forEach(monitor => {
-                    Frequency.findOne({where: {frequency_id: monitor.frequency_id}})
+                    Frequency.findOne({where: {id: monitor.frequency_id}})
                         .then(frequency => {
                             if(frequency !== null){
                                 monitor.frequency = frequency;
